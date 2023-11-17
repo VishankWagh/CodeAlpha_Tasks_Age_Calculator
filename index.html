@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
+    <title>Age Calculator</title>
+</head>
+
+<body>
+    <div class="main">
+        <!-- <div class="logo"> -->
+        <span class="material-symbols-outlined logo">
+            timer
+        </span>
+        <!-- </div> -->
+        <div class="box">
+            <div class="js">Javascript</div>
+            <h1><span>Age</span> Calculator</h1>
+            <form action="" class="form" onsubmit={handleCalculate(e)}>
+                <div>
+                    <input type="date" name="dob" class="dob-inp" id="dob">
+                </div>
+                <div>
+                    <input type="submit" value="Calculate" class="cal-btn">
+                </div>
+            </form>
+            <div class="show-age d-none" id="show-age">
+                <h4>You are:</h4>
+                <div class="age-div">
+                    <span class="material-symbols-outlined stats-logo">
+                        trending_up
+                    </span>
+                    <div class="year age" id="year">
+                        <span id="yr-fig">0</span>YEARS
+                    </div>
+                    <div class="month age" id="month">
+                        <span id="mn-fig">0</span>MONTHS
+                    </div>
+                    <div class="day age" id="day">
+                        <span id="dt-fig">0</span>DAYS
+                    </div>
+                </div>
+                <h4>Old</h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const d = new URLSearchParams(window.location.search);
+        // if()
+        if (d.get('dob')) {
+            const sha = document.getElementById("show-age").classList.remove("d-none");
+            const dob = new Date(d.get('dob'));
+            const today = new Date();
+            console.log(today.getFullYear(), dob.getFullYear());
+            console.log(today.getMonth(), dob.getMonth());
+            console.log(today.getDate(), dob.getDate());
+
+            let yr = today.getFullYear() - dob.getFullYear();
+            let mn = today.getMonth() - dob.getMonth() - 1;
+            let dt = today.getDate() - dob.getDate();
+
+            if (today.getMonth() < dob.getMonth()) {
+                yr--;
+                mn = today.getMonth() + 1;
+                console.log("y", yr);
+            }
+            if (today.getDate() < dob.getDate()) {
+                dt = (30 - dob.getDate()) + today.getDate();
+            }
+
+            document.getElementById('yr-fig').innerHTML = yr;
+            document.getElementById('mn-fig').innerHTML = mn;
+            document.getElementById('dt-fig').innerHTML = dt;
+        }
+        else {
+            const sha = document.getElementById("show-age").classList.add("d-none");
+        }
+        // const dt = new Date(dob);
+        // console.log(d.get('dob'));
+        // }
+    </script>
+</body>
+
+</html>
